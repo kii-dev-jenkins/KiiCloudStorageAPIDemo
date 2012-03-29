@@ -18,8 +18,8 @@ public class FileTabActivity extends TabActivity{
     
     @Override
     protected void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
         
+        super.onCreate(icicle);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.tab_layout);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
