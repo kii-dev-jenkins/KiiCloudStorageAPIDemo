@@ -20,8 +20,8 @@ public class KiiFileOperation {
         KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY);
     }
 
-    private static List<KiiFile> mWorkingFiles;
-    private static List<KiiFile> mTrashFiles;
+    public static List<KiiFile> mWorkingFiles;
+    public static List<KiiFile> mTrashFiles;
 
     public static int asyncListWorkingFiles(
             final WorkingFilesListActivity activity) {
@@ -43,9 +43,8 @@ public class KiiFileOperation {
 
         return token;
     }
-    
-    public static int asyncListTrashFiles(
-            final TrashFilesListActivity activity) {
+
+    public static int asyncListTrashFiles(final TrashFilesListActivity activity) {
         int token = KiiFile.listTrashedFiles(new KiiFileCallBack() {
 
             @Override
@@ -64,80 +63,84 @@ public class KiiFileOperation {
 
         return token;
     }
-    
-    public static int asyncDeleteWorkingFile(final WorkingFilesListActivity activity, final int position){
+
+    public static int asyncDeleteWorkingFile(
+            final WorkingFilesListActivity activity, final int position) {
         KiiFile file = mWorkingFiles.get(position);
-        int token = file.delete(new KiiFileCallBack(){
+        int token = file.delete(new KiiFileCallBack() {
 
             @Override
             public void onDeleteCompleted(int token, boolean success,
                     Exception exception) {
                 ShowInfo.closeProgressDialog();
-                if(success){
+                if (success) {
                     mWorkingFiles.remove(position);
                     activity.rebuildTitle(getTrashFileTitles());
-                }else {
+                } else {
                     ShowInfo.showException(activity, exception);
                 }
-                
+
             }
-            
+
         });
-        
+
         return token;
     }
-    
-    public static int asyncDeleteTrashFile(final TrashFilesListActivity activity, final int position){
+
+    public static int asyncDeleteTrashFile(
+            final TrashFilesListActivity activity, final int position) {
         KiiFile file = mTrashFiles.get(position);
-        int token = file.delete(new KiiFileCallBack(){
+        int token = file.delete(new KiiFileCallBack() {
 
             @Override
             public void onDeleteCompleted(int token, boolean success,
                     Exception exception) {
                 ShowInfo.closeProgressDialog();
-                if(success){
+                if (success) {
                     mTrashFiles.remove(position);
                     activity.rebuildTitle(getWorkingFileTitles());
-                }else {
+                } else {
                     ShowInfo.showException(activity, exception);
                 }
-                
+
             }
-            
+
         });
-        
+
         return token;
     }
-    
-    public static int asyncUploadFile(final WorkingFilesListActivity activity, String filename){
+
+    public static int asyncUploadFile(final WorkingFilesListActivity activity,
+            String filename) {
         KiiFile f = new KiiFile(new File(filename), FILE_CONTAINER);
-        int token = f.upload(new KiiFileCallBack(){
+        int token = f.upload(new KiiFileCallBack() {
             @Override
             public void onUploadCompleted(int token, boolean success,
                     KiiFile file, Exception exception) {
                 ShowInfo.closeProgressDialog();
-                if(success){
+                if (success) {
                     mWorkingFiles.add(0, file);
                     activity.rebuildTitle(getWorkingFileTitles());
-                } else{
+                } else {
                     ShowInfo.showException(activity, exception);
                 }
             }
-            
+
         });
-        
+
         return token;
     }
-    
-    public static int asyncMoveToTrash(final WorkingFilesListActivity activity, final int position){
+
+    public static int asyncMoveToTrash(final WorkingFilesListActivity activity,
+            final int position) {
         KiiFile f = mWorkingFiles.get(position);
-        int token = f.moveToTrash(new KiiFileCallBack(){
+        int token = f.moveToTrash(new KiiFileCallBack() {
 
             @Override
             public void onMoveTrashCompleted(int token, boolean success,
                     KiiFile file, Exception exception) {
                 ShowInfo.closeProgressDialog();
-                if(success){
+                if (success) {
                     mWorkingFiles.remove(position);
                     activity.rebuildTitle(getWorkingFileTitles());
                     mTrashFiles.add(0, file);
@@ -145,21 +148,22 @@ public class KiiFileOperation {
                     ShowInfo.showException(activity, exception);
                 }
             }
-            
+
         });
-        
+
         return token;
     }
-    
-    public static int asyncRestoreFile(final TrashFilesListActivity activity, final int position){
+
+    public static int asyncRestoreFile(final TrashFilesListActivity activity,
+            final int position) {
         KiiFile f = mTrashFiles.get(position);
-        int token = f.restoreFromTrash(new KiiFileCallBack(){
+        int token = f.restoreFromTrash(new KiiFileCallBack() {
 
             @Override
             public void onRestoreTrashCompleted(int token, boolean success,
                     KiiFile file, Exception exception) {
                 ShowInfo.closeProgressDialog();
-                if(success){
+                if (success) {
                     mTrashFiles.remove(position);
                     activity.rebuildTitle(getTrashFileTitles());
                     mWorkingFiles.add(0, file);
@@ -167,45 +171,93 @@ public class KiiFileOperation {
                     ShowInfo.showException(activity, exception);
                 }
             }
-            
+
         });
-        
+
         return token;
     }
 
-    
-    public static int asyncDownloadFile(final WorkingFilesListActivity activity, final int position, final String filename){
+    public static int asyncDownloadFile(
+            final WorkingFilesListActivity activity, final int position,
+            final String filename) {
         KiiFile f = mWorkingFiles.get(position);
-        int token = f.downloadFileBody(new KiiFileCallBack(){
+        int token = f.downloadFileBody(new KiiFileCallBack() {
 
             @Override
             public void onDownloadBodyCompleted(int token, boolean success,
                     Exception exception) {
                 ShowInfo.closeProgressDialog();
-                if(success){
-                    
-                    AlertDialog dialog = new AlertDialog.Builder(activity)
-                    .setTitle("The file have been downloaded successful!")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                if (success) {
 
-                            /* User clicked OK so do some stuff */
-                        }
-                    })
-                    .create();
-                    
+                    AlertDialog dialog = new AlertDialog.Builder(activity)
+                            .setTitle(
+                                    "The file have been downloaded successful!")
+                            .setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(
+                                                DialogInterface dialog,
+                                                int whichButton) {
+
+                                            /* User clicked OK so do some stuff */
+                                        }
+                                    }).create();
+
                     dialog.show();
                 } else {
                     ShowInfo.showException(activity, exception);
                 }
             }
-            
+
         }, filename);
-        
+
         return token;
     }
+
+    public static int asyncUpdateFileCustomField(
+            final WorkingFilesListActivity activity, final int position,
+            final String custom) {
+        KiiFile f = mWorkingFiles.get(position);
+        f.setCustomeField(custom);
+        int token = f.updateMetaData(new KiiFileCallBack() {
+
+            @Override
+            public void onUpdateCompleted(int token, boolean success,
+                    KiiFile file, Exception exception) {
+                ShowInfo.closeProgressDialog();
+                if (success) {
+                    mWorkingFiles.set(position, file);
+                    activity.rebuildTitle(getWorkingFileTitles());
+                } else {
+                    ShowInfo.showException(activity, exception);
+                }
+            }
+
+        });
+        return token;
+    }
+
+    public static int asyncUpdateFile(final WorkingFilesListActivity activity,
+            final int position, String filename) {
+        KiiFile f = mWorkingFiles.get(position);
+        File update = new File(filename);
+        int token = f.update(new KiiFileCallBack(){
+            @Override
+            public void onUpdateCompleted(int token, boolean success,
+                    KiiFile file, Exception exception) {
+                ShowInfo.closeProgressDialog();
+                if (success) {
+                    mWorkingFiles.set(position, file);
+                    activity.rebuildTitle(getWorkingFileTitles());
+                } else {
+                    ShowInfo.showException(activity, exception);
+                }
+            }
+        }, update);
+        return token;
+    }
+
     public static String[] getWorkingFileTitles() {
-        if(mWorkingFiles == null){
+        if (mWorkingFiles == null) {
             return null;
         }
         int length = mWorkingFiles.size();
@@ -216,9 +268,9 @@ public class KiiFileOperation {
 
         return res;
     }
-    
+
     public static String[] getTrashFileTitles() {
-        if(mTrashFiles == null){
+        if (mTrashFiles == null) {
             return null;
         }
         int length = mTrashFiles.size();
@@ -229,4 +281,5 @@ public class KiiFileOperation {
 
         return res;
     }
+
 }

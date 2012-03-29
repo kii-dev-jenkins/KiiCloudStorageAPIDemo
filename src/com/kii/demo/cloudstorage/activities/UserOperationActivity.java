@@ -46,8 +46,6 @@ public class UserOperationActivity extends Activity implements
     private static final int DIALOG_UPDATE_PHONE = 0;
     private static final int DIALOG_RESET_PWD = 1;
 
-    private AlertDialog mProgressDialog;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
