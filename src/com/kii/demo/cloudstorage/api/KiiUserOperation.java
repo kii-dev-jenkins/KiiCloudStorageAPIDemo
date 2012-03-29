@@ -196,6 +196,6 @@ public class KiiUserOperation {
         show.append("\n");
 
         show.append("Details: " + user.toString());
-        ShowInfo.showSuccess(activity, show.toString());
+        ShowInfo.showSuccess(activity, "user operation successful");
     }
 }

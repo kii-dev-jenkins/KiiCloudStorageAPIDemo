@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kii.cloud.storage.KiiClient;
+import com.kii.cloud.storage.exception.CloudExecutionException;
 import com.kii.demo.cloudstorage.R;
 
 public class ShowInfo {
@@ -59,6 +60,19 @@ public class ShowInfo {
     public static void showException(Activity activity, Exception exception) {
         String title = "Exception";
         String msg = exception.getMessage();
+        
+        if(exception instanceof CloudExecutionException){
+            CloudExecutionException cloudException = (CloudExecutionException)exception;
+            StringBuilder sb = new StringBuilder();
+            sb.append("Error:" + cloudException.getError());
+            sb.append("\n\n");
+            sb.append("Exception:" + cloudException.getException());
+            sb.append("\n\n");
+            sb.append("Error Details:" + cloudException.getErrorDetails());
+            msg = sb.toString();
+            
+        }
+        
         AlertDialog dialog = new AlertDialog.Builder(activity)
                 .setIcon(R.drawable.alert_dialog_icon)
                 .setTitle(title)
@@ -78,20 +92,21 @@ public class ShowInfo {
     public static void showSuccess(Activity activity, String msg) {
 
         String title = "Success";
-        AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setIcon(R.drawable.alert_dialog_icon)
-                .setTitle(title)
-                .setMessage(msg)
-                .setPositiveButton(R.string.alert_dialog_ok,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-
-                                /* User clicked OK so do some stuff */
-                            }
-                        }).create();
-
-        dialog.show();
+//        AlertDialog dialog = new AlertDialog.Builder(activity)
+//                .setIcon(R.drawable.alert_dialog_icon)
+//                .setTitle(title)
+//                .setMessage(msg)
+//                .setPositiveButton(R.string.alert_dialog_ok,
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog,
+//                                    int whichButton) {
+//
+//                                /* User clicked OK so do some stuff */
+//                            }
+//                        }).create();
+//
+//        dialog.show();
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
 
     }
 
