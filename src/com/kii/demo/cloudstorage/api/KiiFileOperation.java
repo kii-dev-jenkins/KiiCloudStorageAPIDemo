@@ -62,6 +62,50 @@ public class KiiFileOperation {
         return token;
     }
     
+    public static int asyncDeleteWorkingFile(final WorkingFilesListActivity activity, final int position){
+        KiiFile file = mWorkingFiles.get(position);
+        int token = file.delete(new KiiFileCallBack(){
+
+            @Override
+            public void onDeleteCompleted(int token, boolean success,
+                    Exception exception) {
+                ShowInfo.closeProgressDialog();
+                if(success){
+                    mWorkingFiles.remove(position);
+                    activity.rebuildTitle(getTrashFileTitles());
+                }else {
+                    ShowInfo.showException(activity, exception);
+                }
+                
+            }
+            
+        });
+        
+        return token;
+    }
+    
+    public static int asyncDeleteTrashFile(final TrashFilesListActivity activity, final int position){
+        KiiFile file = mTrashFiles.get(position);
+        int token = file.delete(new KiiFileCallBack(){
+
+            @Override
+            public void onDeleteCompleted(int token, boolean success,
+                    Exception exception) {
+                ShowInfo.closeProgressDialog();
+                if(success){
+                    mTrashFiles.remove(position);
+                    activity.rebuildTitle(getWorkingFileTitles());
+                }else {
+                    ShowInfo.showException(activity, exception);
+                }
+                
+            }
+            
+        });
+        
+        return token;
+    }
+    
     public static int asyncUploadFile(final WorkingFilesListActivity activity, String filename){
         KiiFile f = new KiiFile(new File(filename), FILE_CONTAINER);
         int token = f.upload(new KiiFileCallBack(){
@@ -93,6 +137,29 @@ public class KiiFileOperation {
                 if(success){
                     mWorkingFiles.remove(position);
                     activity.rebuildTitle(getWorkingFileTitles());
+                    mTrashFiles.add(0, file);
+                } else {
+                    ShowInfo.showException(activity, exception);
+                }
+            }
+            
+        });
+        
+        return token;
+    }
+    
+    public static int asyncRestoreFile(final TrashFilesListActivity activity, final int position){
+        KiiFile f = mTrashFiles.get(position);
+        int token = f.restoreFromTrash(new KiiFileCallBack(){
+
+            @Override
+            public void onRestoreTrashCompleted(int token, boolean success,
+                    KiiFile file, Exception exception) {
+                ShowInfo.closeProgressDialog();
+                if(success){
+                    mTrashFiles.remove(position);
+                    activity.rebuildTitle(getTrashFileTitles());
+                    mWorkingFiles.add(0, file);
                 } else {
                     ShowInfo.showException(activity, exception);
                 }
@@ -103,7 +170,10 @@ public class KiiFileOperation {
         return token;
     }
 
-    private static String[] getWorkingFileTitles() {
+    public static String[] getWorkingFileTitles() {
+        if(mWorkingFiles == null){
+            return null;
+        }
         int length = mWorkingFiles.size();
         String[] res = new String[length];
         for (int i = 0; i < length; i++) {
@@ -113,7 +183,10 @@ public class KiiFileOperation {
         return res;
     }
     
-    private static String[] getTrashFileTitles() {
+    public static String[] getTrashFileTitles() {
+        if(mTrashFiles == null){
+            return null;
+        }
         int length = mTrashFiles.size();
         String[] res = new String[length];
         for (int i = 0; i < length; i++) {

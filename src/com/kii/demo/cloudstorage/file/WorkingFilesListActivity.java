@@ -42,6 +42,12 @@ public class WorkingFilesListActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        rebuildTitle(KiiFileOperation.getWorkingFileTitles());
+    }
+
     public void handleRefresh(View v) {
         if (ConstantValues.mSyncMode) {
             // KiiNoteOperation.getAllNote(this);
@@ -86,33 +92,62 @@ public class WorkingFilesListActivity extends Activity {
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
-        menu.add(0, 0, 0, "Update Mime");
-        menu.add(0, 1, 0, "Update Body");
+        // menu.add(0, 0, 0, "Update Mime");
+        // menu.add(0, 1, 0, "Update Body");
         menu.add(0, 2, 0, "Download Body");
         menu.add(0, 3, 0, "Move to trash");
         menu.add(0, 4, 0, "Delete");
-        
+
         super.onCreateContextMenu(menu, v, menuInfo);
     }
-    
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
                 .getMenuInfo();
         final int position = info.position;
-        
+
         if (item.getItemId() == 3) { // Move to trash
-            
+
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setIcon(R.drawable.alert_dialog_icon)
-                    .setTitle("Make sure to move this note to trash!")
+                    .setTitle("Make sure to move this file to trash!")
                     .setPositiveButton(R.string.alert_dialog_ok,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
                                         int whichButton) {
-                                    int token = KiiFileOperation.asyncMoveToTrash(WorkingFilesListActivity.this, position);
-                                    ShowInfo.showProcessing(WorkingFilesListActivity.this,
+                                    int token = KiiFileOperation
+                                            .asyncMoveToTrash(
+                                                    WorkingFilesListActivity.this,
+                                                    position);
+                                    ShowInfo.showProcessing(
+                                            WorkingFilesListActivity.this,
                                             token, "Moving file to trash...");
+                                }
+                            })
+                    .setNegativeButton(R.string.alert_dialog_cancel,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                                }
+                            }).create();
+            dialog.show();
+            return true;
+        } else if (item.getItemId() == 4) { // delete
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.alert_dialog_icon)
+                    .setTitle("Make sure to delete this file!")
+                    .setPositiveButton(R.string.alert_dialog_ok,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                                    int token = KiiFileOperation
+                                            .asyncMoveToTrash(
+                                                    WorkingFilesListActivity.this,
+                                                    position);
+                                    ShowInfo.showProcessing(
+                                            WorkingFilesListActivity.this,
+                                            token, "Deleting file...");
                                 }
                             })
                     .setNegativeButton(R.string.alert_dialog_cancel,
@@ -128,6 +163,7 @@ public class WorkingFilesListActivity extends Activity {
     }
 
     public void rebuildTitle(String[] newTitles) {
+        if(newTitles == null)return;
         mTitles = newTitles;
         mListView.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, mTitles));

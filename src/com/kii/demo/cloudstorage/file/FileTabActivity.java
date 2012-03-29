@@ -33,6 +33,8 @@ public class FileTabActivity extends TabActivity{
         updateUserStateTitle();
         
     }
+    
+    
 
     private void updateUserStateTitle() {
         mLeftTitle.setText("FileManager");
