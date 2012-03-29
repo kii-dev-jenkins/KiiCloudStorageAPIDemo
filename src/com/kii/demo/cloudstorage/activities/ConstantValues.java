@@ -7,7 +7,7 @@ public class ConstantValues {
     
     public static final String DEMO_FILE = "/mnt/sdcard/download/images.jpeg";
     public static final String VIRTUAL_ROOT = "myroot";
-    public static final String TARGET_FILE_NAME = "/mnt/sdcard/download/downloaded_file";
+    public static final String TARGET_FILE_NAME = "downloaded_file";
 
     public static final String[] ITEMS = { "Create User", // 0
             "Login", // 1

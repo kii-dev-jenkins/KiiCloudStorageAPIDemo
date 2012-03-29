@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.kii.demo.cloudstorage.R;
 import com.kii.demo.cloudstorage.activities.ConstantValues;
@@ -158,6 +160,35 @@ public class WorkingFilesListActivity extends Activity {
                             }).create();
             dialog.show();
             return true;
+        } else if(item.getItemId() == 2){ //download
+            LayoutInflater factory = LayoutInflater.from(this);
+            final View textEntryView = factory.inflate(R.layout.alert_dialog_download, null);
+            final TextView filenameView = (TextView) textEntryView.findViewById(R.id.id_edit);
+            filenameView.setText(ConstantValues.TARGET_FILE_NAME);
+            AlertDialog dialog =  new AlertDialog.Builder(this)
+                .setIcon(R.drawable.alert_dialog_icon)
+                .setTitle("Download")
+                .setView(textEntryView)
+                .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String root = Environment.getExternalStorageDirectory().toString();
+                        String filename = root + "/" + filenameView.getText();
+                        int token = KiiFileOperation.asyncDownloadFile(WorkingFilesListActivity.this, position, filename);
+                        ShowInfo.showProcessing(
+                                WorkingFilesListActivity.this,
+                                token, "Dowloading file...");
+                        
+                    }
+                })
+                .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                })
+                .create();
+            
+            dialog.show();
+            
         }
         return super.onContextItemSelected(item);
     }

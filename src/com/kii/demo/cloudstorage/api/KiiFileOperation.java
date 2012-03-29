@@ -3,6 +3,9 @@ package com.kii.demo.cloudstorage.api;
 import java.io.File;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import com.kii.cloud.storage.KiiClient;
 import com.kii.cloud.storage.KiiFile;
 import com.kii.cloud.storage.callback.KiiFileCallBack;
@@ -170,6 +173,37 @@ public class KiiFileOperation {
         return token;
     }
 
+    
+    public static int asyncDownloadFile(final WorkingFilesListActivity activity, final int position, final String filename){
+        KiiFile f = mWorkingFiles.get(position);
+        int token = f.downloadFileBody(new KiiFileCallBack(){
+
+            @Override
+            public void onDownloadBodyCompleted(int token, boolean success,
+                    Exception exception) {
+                ShowInfo.closeProgressDialog();
+                if(success){
+                    
+                    AlertDialog dialog = new AlertDialog.Builder(activity)
+                    .setTitle("The file have been downloaded successful!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                            /* User clicked OK so do some stuff */
+                        }
+                    })
+                    .create();
+                    
+                    dialog.show();
+                } else {
+                    ShowInfo.showException(activity, exception);
+                }
+            }
+            
+        }, filename);
+        
+        return token;
+    }
     public static String[] getWorkingFileTitles() {
         if(mWorkingFiles == null){
             return null;
