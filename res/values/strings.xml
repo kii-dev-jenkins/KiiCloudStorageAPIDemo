@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kii Cloud APIDemo</string>
+    <string name="sync_title">Kii Cloud APIDemo - Sync mode</string>
+    <string name="async_title">Kii Cloud APIDemo - Async mode</string>
+    <string name="alert_dialog_username">Username:</string>
+    <string name="alert_dialog_password">Password:</string>
+    <string name="alert_dialog_note_title">Title:</string>
+    <string name="alert_dialog_note_content">Content:</string>
+    <string name="alert_dialog_note_query">Query:</string>
+    <string name="alert_dialog_email">Email:</string>
+    <string name="alert_dialog_birthday">Birthday:</string>
+    <string name="alert_dialog_phone">Phone:</string>
+    <string name="alert_dialog_note_query_limit">Limit:</string>
+    <string name="create_user">Create User</string>
+    <string name="login">Login</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_cancel_task">Cancel Task</string>
+    <string name="alert_dialog_background">Background</string>
+    <string name="alert_dialog_note_owner">Owner:</string>
+    <string name="alert_dialog_update">Update</string>
+    <string name="file_upload">File Upload</string>
+    <string name="alert_dialog_old_password">Old Password</string>
+    <string name="alert_dialog_new_password">New Password</string>
+    <string name="alert_dialog_file_path">File path</string>
+    <string name="alert_dialog_file_id">File ID</string>
+    <string name="file_info">Getting File Info</string>
+    <string name="file_update">Update File Info</string>
+    <string name="file_delete">Delete File</string>
+    <string name="file_restore">Restore file</string>
+    <string name="file_search">File search</string>
+    <string name="file_search_title">Input text</string>
+    <string name="alert_dialog_file_title">Title</string>
+    <string name="alert_dialog_file_optional">Optional</string>
+    <string name="file_empty">No File ID, please upload a file first</string>
+    
+    <string name="header_btn_create">Create</string>
+    <string name="header_btn_refresh">Refresh</string>
+    <string name="header_text_path">Last refresh time:</string>
+    <string name="header_btn_search">Search</string>
+    <string name="title_create">Create</string>
+    
+    <string name="nothing_to_save">There is nothing to save</string>
+    <string name="title_edit">Edit: \"%1$s\"</string>
+    <string name="header_btn_save">Save</string>
+    <string name="header_btn_cancel">Cancel</string>
+    
+    <string name="alert_dialog_note_title_query">Title:</string>
+    <string name="alert_dialog_note_content_query">Content:</string>
+</resources>

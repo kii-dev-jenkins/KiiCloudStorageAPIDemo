@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="KiiCloudStorageSampleApp" default="help">
+    <!-- Add by Kii -->
+    <property name="svn" value="svn" />
+    <property file="${sign.properties}" />
+    <property name="kii.absolute.dir" location="." />
+<!--
+    <target name="svnrevert">
+        <exec dir="." executable="${svn}" failifexecutionfails="false">
+            <arg line="revert" />
+            <arg line="-R" />
+            <arg line="." /> 
+        </exec>
+    </target>
+-->
+    <target name="svnversion">
+        <exec dir="../" executable="svnversion" outputproperty="svnversion" failifexecutionfails="false">
+            <arg line="-c" />
+            <redirector>
+                <outputfilterchain>
+                    <tokenfilter>
+                        <replaceregex pattern="[0-9]+\:" replace="" />
+                        <replaceregex pattern="[^0-9]+" replace="" />
+                    </tokenfilter>
+                </outputfilterchain>
+            </redirector>
+        </exec>
+        <echo>SVN Version:${svnversion}</echo>
+    </target>
+    <target name="copy-code">
+        <delete>
+            <fileset dir="libs/">
+                <include name="*.jar"/>
+            </fileset>
+        </delete> 
+        <copy todir="libs/">
+            <fileset dir="../KiiCloudStorageSDK/">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="set-version-channel" depends="svnversion, copy-code">
+<!--
+        <condition property="channel" value="${channel_id}" else="Developing">
+            <isset property="channel_id" />
+        </condition>
+        <echo>Channel:${channel}</echo>
+-->
+        <replaceregexp file="AndroidManifest.xml"
+            match="^(\s*android\:versionName=.*)(.*)debug(.*)"
+            replace="\1${svnversion}\3"
+            byline="true"
+            encoding="UTF-8" />
+        <fileset dir="libs/" id="lib_files">
+            <include name="*.jar"/>
+        </fileset>
+        <pathconvert property="sdk_path" refid="lib_files">
+            <map from="${basedir}/libs" to=''/>
+        </pathconvert>
+        <echo>SDK Path:${sdk_path}</echo>
+        <replaceregexp file=".classpath"
+            match="^(.*)combineaccessrules=.*"
+            replace="\1kind=&quot;lib&quot; path=&quot;libs${sdk_path}&quot; />"
+            byline="true"
+            encoding="UTF-8" />
+    </target>
+    <target name="clean-old">
+        <delete dir="bin" />
+        <delete dir="gen" />
+        <delete>
+            <fileset dir=".">
+                <include name="*.apk"/>
+                <include name="*.zip"/>
+            </fileset>
+        </delete> 
+    </target>
+    <target name="package-src">
+        <zip destfile="KiiCloudStorageSampleApp-src-r${svnversion}.zip"
+            basedir="./"
+            excludesfile="build.xml"
+            />
+    </target>
+    <target name="kii-release" depends="clean, clean-old, set-version-channel, copy-code, package-src,  release">
+        <property name="kii.release.file.name"
+            value="${ant.project.name}-r${svnversion}.apk" />
+        <property name="kii.release.file"
+            location="${kii.absolute.dir}/${kii.release.file.name}" />
+        <copy overwrite="true" file="${out.final.file}" tofile="${kii.release.file}" />
+    </target>
+    <!-- End add by Kii -->
+
+    <property file="local.properties" />
+
+    <property file="ant.properties" />
+
+    <property file="build.properties" />
+
+    <loadproperties srcFile="project.properties" />
+
+    <!-- quick check on sdk.dir -->
+    <fail
+            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
+            unless="sdk.dir"
+    />
+
+    <import file="${sdk.dir}/tools/ant/build.xml" />
+
+</project>

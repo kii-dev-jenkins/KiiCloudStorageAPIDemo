@@ -1,0 +1,93 @@
+== Cloud Storage SDK ==
+
+[http://static.kii.com/hm/s/ Javadoc for Cloud Storage SDK]
+[[File:http://static.kii.com/hm/img/cloud.png|Overview of Cloud Storage SDK]]
+
+== Quick Start Guide == 
+
+=== How to start? ===
+
+# Register with Kii for an Application ID and Application Key 
+# Copy 1 library into your projects: KiiCloudStorageSDK-xxx.jar (java library) 
+# Update the AndroidManifest.xml: 
+<pre> 
+<!-- permission --> 
+<uses-permission android:name="android.permission.INTERNET" /> 
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission> 
+<!-- the end for permission --> 
+</pre> 
+
+=== How to create an application user? === 
+
+<pre> 
+EasyClient.start(context, appName, appKey); 
+KiiUser user = new KiiUser(); 
+user.setEmail(email); 
+user.setUsername(username); 
+EasyClient.getUserManager().createUser(user, password); 
+</pre> 
+
+=== How to Log In? ===
+
+<pre> 
+EasyClient.start(context, appName, appKey); 
+UserResult result = EasyClient.getUserManager().login(username, password); 
+KiiUser user - result.getKiiUser(); 
+</pre> 
+
+=== How to create an object? === 
+
+<pre> 
+EasyClient.start(context, appName, appKey); 
+KiiObject object = new KiiObject(); 
+object.put("title", "Test"); 
+object.put("body", "This is the test body"); 
+EasyClient.getObjectManager().put(object); 
+</pre> 
+
+=== How to get list of objects? ===
+
+<pre> 
+EasyClient.start(context, appName, appKey); 
+EntityResult result = EasyClient.getObjectManager().listAll(); 
+List<KiiObject> entities = result.getEntities(KiiObject.class); 
+</pre> 
+
+== Cloud Storage Sample App ==
+
+The purpose of this application is to provide to Android developers a simple application that allows to learn the usage of the Cloud Storage API and quickly test the operations provided. The API capabilities that can be tested are:
+* User operations
+** Create a user
+** Login
+** Logout
+** Set user birthday
+** Change password
+** Forgot password
+** Update user phone
+** Show user information
+* Note operations
+** Create a note
+** View a note
+** View note list
+** Refresh
+** Search for a note
+* File operations
+** Upload a file
+** List files
+** View file information
+** Update file information
+** Download the file (get the file content)
+** Delete a file
+** Restore a file
+** List files in trash
+** Delete a file from trash
+** Empty trashcan
+
+=== Screen Shots ===
+
+<gallery>
+File:http://static.kii.com/hm/img/KiiCloudStorageSampleApp01.png
+File:http://static.kii.com/hm/img/KiiCloudStorageSampleApp04.png
+File:http://static.kii.com/hm/img/KiiCloudStorageSampleApp05.png
+File:http://static.kii.com/hm/img/KiiCloudStorageSampleApp07.png
+</gallery>
