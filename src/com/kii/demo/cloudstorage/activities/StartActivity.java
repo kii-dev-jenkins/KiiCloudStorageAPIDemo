@@ -23,6 +23,7 @@ import com.kii.cloud.storage.KiiUser;
 import com.kii.cloud.storage.callback.KiiUserCallBack;
 import com.kii.demo.cloudstorage.R;
 import com.kii.demo.cloudstorage.api.KiiUserOperation;
+import com.kii.demo.cloudstorage.file.FileTabActivity;
 import com.kii.demo.cloudstorage.notepad.NoteItemListActivity;
 
 /**
@@ -94,7 +95,9 @@ public class StartActivity extends Activity implements OnItemClickListener {
                 break;
 
             case ConstantValues.ITEM_OPERATON_FILES:
-                Intent intent = new Intent(this, FileOperationActivity.class);
+                if (alertNoUserLogin())
+                    return;
+                Intent intent = new Intent(this, FileTabActivity.class);
                 startActivity(intent);
                 break;
         }

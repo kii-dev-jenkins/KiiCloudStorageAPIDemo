@@ -33,11 +33,19 @@
         </activity>
         <activity
             android:label="@string/app_name"
-            android:name="com.kii.demo.cloudstorage.activities.FileOperationActivity" >
+            android:name="com.kii.demo.cloudstorage.activities.UserOperationActivity" >
         </activity>
         <activity
             android:label="@string/app_name"
-            android:name="com.kii.demo.cloudstorage.activities.UserOperationActivity" >
+            android:name="com.kii.demo.cloudstorage.file.FileTabActivity" >
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name="com.kii.demo.cloudstorage.file.TrashFilesListActivity" >
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name="com.kii.demo.cloudstorage.file.WorkingFilesListActivity" >
         </activity>
     </application>
 

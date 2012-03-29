@@ -49,4 +49,7 @@
     
     <string name="alert_dialog_note_title_query">Title:</string>
     <string name="alert_dialog_note_content_query">Content:</string>
+    
+    <string name="tab_work">Working</string>
+    <string name="tab_trash">Trash</string>
 </resources>
