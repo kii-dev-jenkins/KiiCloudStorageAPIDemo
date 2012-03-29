@@ -55,7 +55,6 @@ public class TrashFilesListActivity extends Activity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         menu.add(0, 0, 0, "Restore");
         menu.add(0, 1, 0, "Delete");
 

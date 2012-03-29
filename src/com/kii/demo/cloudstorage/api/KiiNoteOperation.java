@@ -2,8 +2,6 @@ package com.kii.demo.cloudstorage.api;
 
 import java.util.List;
 
-import org.json.JSONException;
-
 import android.widget.Toast;
 
 import com.kii.cloud.storage.KiiClient;

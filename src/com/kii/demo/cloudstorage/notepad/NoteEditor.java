@@ -1,9 +1,5 @@
 package com.kii.demo.cloudstorage.notepad;
 
-import org.json.JSONException;
-import com.kii.demo.cloudstorage.R;
-import com.kii.demo.cloudstorage.activities.ConstantValues;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.kii.demo.cloudstorage.R;
 
 public class NoteEditor extends Activity {
     private static final String TAG = "NoteEditor";

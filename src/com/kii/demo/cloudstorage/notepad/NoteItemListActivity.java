@@ -38,7 +38,7 @@ import com.kii.demo.cloudstorage.api.KiiNoteOperation;
  */
 public class NoteItemListActivity extends Activity implements
         OnItemClickListener {
-    private static final String TAG = "NoteItemListActivity";
+    //private static final String TAG = "NoteItemListActivity";
     private TextView mRightTitle;
     private TextView mLeftTitle;
 

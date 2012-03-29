@@ -3,13 +3,6 @@ package com.kii.demo.cloudstorage.activities;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.json.JSONException;
-
-import com.kii.cloud.storage.KiiClient;
-import com.kii.cloud.storage.KiiUser;
-import com.kii.demo.cloudstorage.R;
-import com.kii.demo.cloudstorage.api.KiiUserOperation;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -28,7 +21,11 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.kii.cloud.storage.KiiClient;
+import com.kii.cloud.storage.KiiUser;
+import com.kii.demo.cloudstorage.R;
+import com.kii.demo.cloudstorage.api.KiiUserOperation;
 
 /**
  * 

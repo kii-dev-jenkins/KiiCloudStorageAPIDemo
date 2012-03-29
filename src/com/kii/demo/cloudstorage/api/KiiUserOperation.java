@@ -1,7 +1,5 @@
 package com.kii.demo.cloudstorage.api;
 
-import org.json.JSONException;
-
 import android.app.Activity;
 
 import com.kii.cloud.storage.KiiClient;

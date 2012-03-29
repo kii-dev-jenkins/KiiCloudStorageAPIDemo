@@ -22,9 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.kii.cloud.storage.KiiClient;
 import com.kii.cloud.storage.KiiFile;
-import com.kii.cloud.storage.KiiUser;
 import com.kii.demo.cloudstorage.R;
 import com.kii.demo.cloudstorage.activities.ConstantValues;
 import com.kii.demo.cloudstorage.activities.ShowInfo;
@@ -103,7 +101,6 @@ public class WorkingFilesListActivity extends Activity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         menu.add(0, 0, 0, "Update Custom Field");
         menu.add(0, 1, 0, "Update Body");
         menu.add(0, 2, 0, "Download Body");

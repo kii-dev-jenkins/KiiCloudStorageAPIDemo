@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.kii.cloud.storage.KiiClient;
 import com.kii.cloud.storage.KiiUser;
-import com.kii.cloud.storage.callback.KiiUserCallBack;
 import com.kii.demo.cloudstorage.R;
 import com.kii.demo.cloudstorage.api.KiiUserOperation;
 import com.kii.demo.cloudstorage.file.FileTabActivity;
