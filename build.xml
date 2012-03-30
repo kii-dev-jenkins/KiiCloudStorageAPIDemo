@@ -70,7 +70,7 @@
         <copy overwrite="true" file="${out.final.file}" tofile="${kii.release.file}" />
     </target>
     
-    <target name="set-base-url">
+    <target name="set-app-info">
         <replaceregexp 
     	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
     	    byline="true" 
