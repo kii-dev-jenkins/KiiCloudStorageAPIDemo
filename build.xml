@@ -69,11 +69,35 @@
             location="${kii.absolute.dir}/${kii.release.file.name}" />
         <copy overwrite="true" file="${out.final.file}" tofile="${kii.release.file}" />
     </target>
+    
+    <target name="set-base-url">
+        <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String APP_ID\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1&quot;${app.id}&quot;\3" />
+    	    <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String APP_KEY\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1&quot;${app.key}&quot;\3" />
+    	    <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String BAST_URL\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1&quot;${server.uri}&quot;\3" />
+    </target>
+    
     <!-- End add by Kii -->
     <property file="local.properties" />
 
 
     <property file="ant.properties" />
+    
+    
 
 
     <loadproperties srcFile="project.properties" />
@@ -86,26 +110,4 @@
     
     <!-- version-tag: 1 -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
-    
-    <target name="set-app-info">
-        <replaceregexp 
-    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
-    	    byline="true" 
-    	    encoding="UTF-8" 
-    	    match="^(\s*public static final String APP_ID\s*=\s*)(.*)(\s*;\s*)$" 
-    	    replace="\1&quot;${app.id}&quot;\3" />
-    	  <replaceregexp 
-    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
-    	    byline="true" 
-    	    encoding="UTF-8" 
-    	    match="^(\s*public static final String APP_KEY\s*=\s*)(.*)(\s*;\s*)$" 
-    	    replace="\1&quot;${app.key}&quot;\3" />
-    	  <replaceregexp 
-    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
-    	    byline="true" 
-    	    encoding="UTF-8" 
-    	    match="^(\s*public static final String BAST_URL\s*=\s*)(.*)(\s*;\s*)$" 
-    	    replace="\1&quot;${server.uri}&quot;\3" />
-    </target>
-
 </project>
