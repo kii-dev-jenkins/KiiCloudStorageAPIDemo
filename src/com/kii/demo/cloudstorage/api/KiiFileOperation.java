@@ -18,7 +18,7 @@ public class KiiFileOperation {
     private static final String FILE_CONTAINER = "apidemo";
 
     static {
-        KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY, AppInfo.BAST_URL);
+        KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY, AppInfo.BASE_URL);
     }
 
     public static List<KiiFile> mWorkingFiles;
