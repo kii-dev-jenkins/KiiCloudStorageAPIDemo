@@ -64,7 +64,7 @@
     <target name="kii-release" depends="clean, set-version-channel,set-app-info, package-src, release">
         <mkdir dir="${kii.absolute.dir}" />
         <property name="kii.release.file.name"
-            value="${ant.project.name}-{app.name}-r${svnversion}.apk" />
+            value="${ant.project.name}-${app.name}-r${svnversion}.apk" />
         <property name="kii.release.file"
             location="${kii.absolute.dir}/${kii.release.file.name}" />
         <copy overwrite="true" file="${out.final.file}" tofile="${kii.release.file}" />
