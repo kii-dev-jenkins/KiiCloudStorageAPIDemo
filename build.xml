@@ -61,10 +61,10 @@
             byline="true"
             encoding="UTF-8" />
     </target>
-    <target name="kii-release" depends="clean, clean-old, set-version-channel, package-src, release">
+    <target name="kii-release" depends="clean, clean-old, set-version-channel,set-app-info, package-src, release">
         <mkdir dir="${kii.absolute.dir}" />
         <property name="kii.release.file.name"
-            value="${ant.project.name}-r${svnversion}.apk" />
+            value="${ant.project.name}-{app.name}-r${svnversion}.apk" />
         <property name="kii.release.file"
             location="${kii.absolute.dir}/${kii.release.file.name}" />
         <copy overwrite="true" file="${out.final.file}" tofile="${kii.release.file}" />
@@ -86,5 +86,26 @@
     
     <!-- version-tag: 1 -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
+    
+    <target name="set-app-info">
+        <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String APP_ID\s*=\s*")(.*)("\s*;\s*)$" 
+    	    replace="\1${app.id}\3" />
+    	  <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String APP_KEY\s*=\s*")(.*)("\s*;\s*)$" 
+    	    replace="\1${app.key}\3" />
+    	  <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String BAST_URL\s*=\s*")(.*)("\s*;\s*)$" 
+    	    replace="\1${server.uri}\3" />
+    </target>
 
 </project>
