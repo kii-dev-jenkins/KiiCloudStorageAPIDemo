@@ -87,8 +87,8 @@
     	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
     	    byline="true" 
     	    encoding="UTF-8" 
-    	    match="^(\s*public static final String BAST_URL\s*=\s*)(.*)(\s*;\s*)$" 
-    	    replace="\1&quot;$SERVER URI IF NEED&quot;\3" />
+    	    match="^(\s*public static final String BASE_URL\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1null\3" />
     </target>
     
     <target name="set-app-info">
@@ -108,7 +108,7 @@
     	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
     	    byline="true" 
     	    encoding="UTF-8" 
-    	    match="^(\s*public static final String BAST_URL\s*=\s*)(.*)(\s*;\s*)$" 
+    	    match="^(\s*public static final String BASE_URL\s*=\s*)(.*)(\s*;\s*)$" 
     	    replace="\1&quot;${server.uri}&quot;\3" />
     </target>
     
