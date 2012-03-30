@@ -5,7 +5,7 @@
     <property file="${sign.properties}" />
     <property name="kii.absolute.dir" location="." />
 
-    <target name="package-src">
+    <target name="package-src" depends="set-app-info-for-src">
         <zip destfile="KiiCloudStorageAPIDemo-src-r${svnversion}.zip">
             <zipfileset prefix="KiiCloudStorageAPIDemo"
                 dir="."
@@ -61,13 +61,34 @@
             byline="true"
             encoding="UTF-8" />
     </target>
-    <target name="kii-release" depends="clean, set-version-channel,set-app-info, package-src, release">
+    <target name="kii-release" depends="clean, set-version-channel,set-app-info, release">
         <mkdir dir="${kii.absolute.dir}" />
         <property name="kii.release.file.name"
             value="${ant.project.name}-${app.name}-r${svnversion}.apk" />
         <property name="kii.release.file"
             location="${kii.absolute.dir}/${kii.release.file.name}" />
         <copy overwrite="true" file="${out.final.file}" tofile="${kii.release.file}" />
+    </target>
+    
+    <target name="set-app-info-for-src">
+        <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String APP_ID\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1&quot;APP ID&quot;\3" />
+    	    <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String APP_KEY\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1&quot;APP KEY&quot;\3" />
+    	    <replaceregexp 
+    	    file="src/com/kii/demo/cloudstorage/api/AppInfo.java" 
+    	    byline="true" 
+    	    encoding="UTF-8" 
+    	    match="^(\s*public static final String BAST_URL\s*=\s*)(.*)(\s*;\s*)$" 
+    	    replace="\1&quot;$SERVER URI IF NEED&quot;\3" />
     </target>
     
     <target name="set-app-info">
