@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import com.kii.cloud.storage.KiiClient;
 import com.kii.cloud.storage.KiiFile;
 import com.kii.cloud.storage.callback.KiiFileCallBack;
+import com.kii.cloud.storage.callback.KiiFileProgress;
 import com.kii.demo.cloudstorage.activities.ShowInfo;
 import com.kii.demo.cloudstorage.file.TrashFilesListActivity;
 import com.kii.demo.cloudstorage.file.WorkingFilesListActivity;
@@ -126,6 +127,26 @@ public class KiiFileOperation {
                 }
             }
 
+            @Override
+            public void onProgressUpdate(int token, KiiFileProgress progress) {
+                switch(progress.getStatus()){
+                    case KiiFileProgress.STATUS_START_UPDATE_META:
+                        ShowInfo.updateProgressText("Start to upload metadata...");
+                        break;
+                    case KiiFileProgress.STATUS_START_UPDATE_BODY:
+                        ShowInfo.updateProgressText("Start to upload file body...");
+                        break;
+                    case KiiFileProgress.STATUS_UPDATING_BODY:
+                        long totalsize = progress.getTotalSize();
+                        long currentsize = progress.getCurrentSize();
+                        String msg = "Uploading file body :" + currentsize +"/" + totalsize;
+                        ShowInfo.updateProgressText(msg);
+                        break;
+                }
+            }
+            
+            
+
         });
 
         return token;
@@ -207,6 +228,21 @@ public class KiiFileOperation {
                     ShowInfo.showException(activity, exception);
                 }
             }
+            
+            @Override
+            public void onProgressUpdate(int token, KiiFileProgress progress) {
+                switch(progress.getStatus()){
+                    case KiiFileProgress.STATUS_START_DOWNLOAD_BODY:
+                        ShowInfo.updateProgressText("Start to download file...");
+                        break;
+                    case KiiFileProgress.STATUS_DOWNLOADING_BODY:
+                        long totalsize = progress.getTotalSize();
+                        long currentsize = progress.getCurrentSize();
+                        String msg = "Downloading file body :" + currentsize +"/" + totalsize;
+                        ShowInfo.updateProgressText(msg);
+                        break;
+                }
+            }
 
         }, filename);
 
@@ -250,6 +286,24 @@ public class KiiFileOperation {
                     activity.rebuildTitle(getWorkingFileTitles());
                 } else {
                     ShowInfo.showException(activity, exception);
+                }
+            }
+            
+            @Override
+            public void onProgressUpdate(int token, KiiFileProgress progress) {
+                switch(progress.getStatus()){
+                    case KiiFileProgress.STATUS_START_UPDATE_META:
+                        ShowInfo.updateProgressText("Start to update metadata...");
+                        break;
+                    case KiiFileProgress.STATUS_START_UPDATE_BODY:
+                        ShowInfo.updateProgressText("Start to update file body...");
+                        break;
+                    case KiiFileProgress.STATUS_UPDATING_BODY:
+                        long totalsize = progress.getTotalSize();
+                        long currentsize = progress.getCurrentSize();
+                        String msg = "Updating file body :" + currentsize +"/" + totalsize;
+                        ShowInfo.updateProgressText(msg);
+                        break;
                 }
             }
         }, update);

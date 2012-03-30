@@ -14,6 +14,7 @@ import com.kii.demo.cloudstorage.R;
 
 public class ShowInfo {
     private static AlertDialog mProgressDialog;
+    private static TextView mProgressTextView;
     
     public static  void showProcessing(final Activity activity, final int token, String process_title) {
         closeProgressDialog();
@@ -21,9 +22,9 @@ public class ShowInfo {
         LayoutInflater factory = LayoutInflater.from(activity);
 
         final View processView = factory.inflate(R.layout.processing, null);
-        TextView processTitle = (TextView) processView
+        mProgressTextView = (TextView) processView
                 .findViewById(R.id.process_text);
-        processTitle.setText(process_title);
+        mProgressTextView.setText(process_title);
 
         mProgressDialog = new AlertDialog.Builder(activity)
                 .setIcon(R.drawable.alert_dialog_icon)
@@ -51,6 +52,12 @@ public class ShowInfo {
         mProgressDialog.show();
     }
 
+    
+    public static void updateProgressText(String text){
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressTextView.setText(text);
+        }
+    }
     public static void closeProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();

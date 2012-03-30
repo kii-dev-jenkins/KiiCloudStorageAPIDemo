@@ -38,7 +38,7 @@ public class WorkingFilesListActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.workfilelist);
-
+        
         mListView = (ListView) findViewById(R.id.listView1);
         mListView.setOnCreateContextMenuListener(this);
 
