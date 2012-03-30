@@ -12,7 +12,7 @@ import com.kii.demo.cloudstorage.activities.UserOperationActivity;
 
 public class KiiUserOperation {
     static {
-        KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY);
+        KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY,AppInfo.BAST_URL);
     }
 
     // ------------ Sync Methods ----------------

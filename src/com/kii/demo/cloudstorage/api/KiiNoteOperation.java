@@ -25,7 +25,7 @@ public class KiiNoteOperation {
     private static KiiQuery mNextQuery;
 
     static {
-        KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY);
+        KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY, AppInfo.BAST_URL);
     }
     
     private static String[] getTitles(){
