@@ -91,6 +91,6 @@ public class ConstantValues {
 
     public static final String KII_OBJECT_NAME = "test_note2";
 
-    public static final String KII_FILE_VIRTUAL_ROOT = "test";
+    public static final String KII_FILE_CONTAINER = "test";
 
 }
