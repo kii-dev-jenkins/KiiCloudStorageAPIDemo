@@ -2,13 +2,13 @@
 
 
 
-A variety of small applications that demonstrate th use of Kii Cloud Storage SDK. It includes samples of:
+A variety of small applications that demonstrate the use of Kii Cloud Storage SDK. It includes samples of:
 
 - Application User Management
 - Object Management
 - File Management
 
-![Scrren shots](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/raw/master/doc/screen_shots.jpg)
+![Screen shots](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/raw/master/doc/screen_shots.jpg)
 
 ## Application User Management ##
 
@@ -40,12 +40,12 @@ A variety of small applications that demonstrate th use of Kii Cloud Storage SDK
 **Backup File Sample Application** which demonstrates how to backup local files and download files.
 
 - Container name is *apidemo*
-- Upload local file with customized metaData
+- Upload local file with customized metadata
 - Download, update, delete and trash a file in KiiCloud
 - List all working files in Kii Cloud
 - List all trashed files in Kii Cloud
 - Asynchronous Methods
-- Showing upload and dnload progress
+- Showing upload and download progress
 
 *Refer to [KiiFileOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiFileOperation.java)*
 
