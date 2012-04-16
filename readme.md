@@ -1,12 +1,14 @@
 # Kii Cloud Storage API Demos #
 
+
+
 A variety of small applications that demonstrate th use of Kii Cloud Storage SDK. It includes samples of:
 
 - Application User Management
 - Object Management
 - File Management
 
-----------
+![Scrren shots](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/raw/master/doc/screen_shots.jpg)
 
 ## Application User Management ##
 
@@ -15,9 +17,8 @@ A variety of small applications that demonstrate th use of Kii Cloud Storage SDK
 - Change password
 - Both Synchronous and Asynchronous Methods
 
-*Refer to com.kii.demo.cloudstorage.api.KiiUserOperation class*
+*Refer to [KiiUserOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiUserOperation.java)*
 
-----------
 
 ## Object Management ##
 
@@ -31,9 +32,8 @@ A variety of small applications that demonstrate th use of Kii Cloud Storage SDK
 - Retrieve the query results by batch
 - Asynchronous Methods 
 
-*Refer to com.kii.demo.cloudstorage.api.KiiNoteOperation class*
+*Refer to [KiiUNoteOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiNoteOperation.java)*
 
-----------
 
 ## File Management ##
 
@@ -47,8 +47,7 @@ A variety of small applications that demonstrate th use of Kii Cloud Storage SDK
 - Asynchronous Methods
 - Showing upload and dnload progress
 
-*Refer to com.kii.demo.cloudstorage.api.KiiFileOperation class*
-
+*Refer to [KiiFileOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiFileOperation.java)*
 
 ----------
 
