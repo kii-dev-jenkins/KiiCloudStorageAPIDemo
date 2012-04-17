@@ -29,10 +29,10 @@ A variety of small applications that demonstrate the use of Kii Cloud Storage SD
 - Create, update, delete and view note
 - List all notes
 - Query notes by title, content and owner
-- Retrieve the query results by batch
-- Asynchronous Methods 
+- Retrieve query results by batch
+- Asynchronous methods with cancel support
 
-*Refer to [KiiUNoteOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiNoteOperation.java)*
+*Refer to [KiiNoteOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiNoteOperation.java)*
 
 
 ## File Management ##
@@ -40,12 +40,12 @@ A variety of small applications that demonstrate the use of Kii Cloud Storage SD
 **Backup File Sample Application** which demonstrates how to backup local files and download files.
 
 - Container name is *demo_file*
-- Upload local file with customized metadata
+- Upload local file with customized metadata to KiiCloud
 - Download, update, delete and trash a file in KiiCloud
 - List all working files in Kii Cloud
 - List all trashed files in Kii Cloud
-- Asynchronous Methods
-- Showing upload and download progress
+- Asynchronous methods with cancel support
+- Publish upload and download progress
 
 *Refer to [KiiFileOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiFileOperation.java)*
 

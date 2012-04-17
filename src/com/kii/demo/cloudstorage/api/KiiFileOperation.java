@@ -398,7 +398,7 @@ public class KiiFileOperation {
     }
 
     /**
-     * get list of working file title from cache
+     * get list of working files from cache
      */
     public static String[] getWorkingFileTitles() {
         if (mWorkingFiles == null) {
@@ -414,7 +414,7 @@ public class KiiFileOperation {
     }
 
     /**
-     * get list of trashed file title from cache
+     * get list of trashed files from cache
      */
     public static String[] getTrashFileTitles() {
         if (mTrashedFiles == null) {
