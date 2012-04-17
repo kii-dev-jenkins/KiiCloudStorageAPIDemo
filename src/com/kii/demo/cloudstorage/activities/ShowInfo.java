@@ -116,24 +116,7 @@ public class ShowInfo {
     }
 
     public static void showSuccess(Activity activity, String msg) {
-
-        String title = "Success";
-//        AlertDialog dialog = new AlertDialog.Builder(activity)
-//                .setIcon(R.drawable.alert_dialog_icon)
-//                .setTitle(title)
-//                .setMessage(msg)
-//                .setPositiveButton(R.string.alert_dialog_ok,
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog,
-//                                    int whichButton) {
-//
-//                                /* User clicked OK so do some stuff */
-//                            }
-//                        }).create();
-//
-//        dialog.show();
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-
     }
 
     public static void showError(Activity activity, String msg) {

@@ -24,7 +24,7 @@ A variety of small applications that demonstrate the use of Kii Cloud Storage SD
 
 **Note Sample Application** which demonstrates how to use Object Storage to store note.
 
-- Object ClassName is *test_note2*
+- Object ClassName is *demo_note*
 - Fields are title, content and creator
 - Create, update, delete and view note
 - List all notes
@@ -39,7 +39,7 @@ A variety of small applications that demonstrate the use of Kii Cloud Storage SD
 
 **Backup File Sample Application** which demonstrates how to backup local files and download files.
 
-- Container name is *apidemo*
+- Container name is *demo_file*
 - Upload local file with customized metadata
 - Download, update, delete and trash a file in KiiCloud
 - List all working files in Kii Cloud
@@ -55,7 +55,7 @@ A variety of small applications that demonstrate the use of Kii Cloud Storage SD
 
 - Update the Sample app with your own application ID and application key at com.kii.demo.cloudstorage.api.AppInfo class. 
 
-- The SDK javadoc is not automtatic visible in your eclipse project, you need to attach the JavaDoc(lcoated in folder doc) to the Kii Cloud SDK jar file(located in folder lib). 
+- The SDK javadoc is not automtatic visible in your eclipse project, you need to attach the JavaDoc([doc folder](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/tree/master/doc)) to the Kii Cloud SDK jar file ([lib folder](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/tree/master/libs)). 
 
 
 - [Java API documenatation](http://static.kii.com/devportal/production/docs/storage/)

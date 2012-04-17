@@ -34,19 +34,29 @@ import com.kii.demo.cloudstorage.notepad.NoteItemListActivity;
 
 public class KiiNoteOperation {
 
+	// Note object class name    
+    public static final String KII_OBJECT_TYPE = "demo_note";
+
+	// Key's name for note's title
     public final static String PROPERTY_TITLE = "title";
+	// Key's name for note's content
     public final static String PROPERTY_CONTENT = "content";
-    
-    public static final String KII_OBJECT_TYPE = "test_note2";
    
+    // cache note objects
     public static List<KiiObject> mObjects;
+    // indicate if there is more result on Kii Cloud 
     public static boolean isMore;
+    // KiiQuery for retrieving next batch of result on Kii Cloud
     private static KiiQuery mNextQuery;
 
     static {
+    	// Initialize KiiClient SDK with Application ID and Key
         KiiClient.initialize(AppInfo.APP_ID, AppInfo.APP_KEY, AppInfo.BASE_URL);
     }
     
+    /**
+     * Get the list notes by title only 
+     */
     private static String[] getTitles(){
         int length = mObjects.size();
         String[] res = new String[isMore?length + 1:length];
@@ -57,37 +67,32 @@ public class KiiNoteOperation {
         if(isMore){
             res[length] = "More...";
         }
-        
         return res;
     }
 
-    // ------------ Sync Methods ----------------
-    public static void getAllNote(NoteItemListActivity activity) {
-        try {
-            KiiQueryResult<KiiObject> result = KiiObject.query(KII_OBJECT_TYPE, null);
-            mObjects = result.getResult();
-            isMore = false;
-            activity.rebuildTitle(getTitles());
-        } catch (Exception e) {
-            ShowInfo.showException(activity, e);
-        }
-    }
 
-    
-    // --------------- Async Method -------------------------
-    
+    /**
+     * List all the notes from Kii Cloud
+     */
     public static int asyncGetAllNote(final NoteItemListActivity activity) {
+    	// List all the notes by query with KiiQuery is null
         int token = KiiObject.query(new KiiObjectCallBack(){
 
+        	// implement the call back on query completed
             @Override
             public void onQueryCompleted(int token, boolean success,
                     KiiQueryResult<KiiObject> objects, Exception exception) {
+            	// close the progress dialog
                 ShowInfo.closeProgressDialog();
                 if(success){
+                	// get the list of objects
                     mObjects = objects.getResult();
-                    isMore = false;
+                    // update the UI with updated note's title
                     activity.rebuildTitle(getTitles());
+                    // no more result on the Kii Cloud
+                    isMore = false;
                 } else{
+                	// show error message
                     ShowInfo.showException(activity, exception);
                 }
             }
@@ -96,50 +101,71 @@ public class KiiNoteOperation {
                 
 
         return token;
-
     }
     
+    /**
+     * Query Kii Cloud for the list of note that matches KiiQuery
+     */
     public static int asyncQueryNote(final NoteItemListActivity activity, KiiQuery query) {
+    	// query Kii Query
         int token = KiiObject.query(new KiiObjectCallBack(){
 
-            @Override
+        	// implement the call back on query completed
+        	@Override
             public void onQueryCompleted(int token, boolean success,
                     KiiQueryResult<KiiObject> objects, Exception exception) {
+        		// close the progress dialog
                 ShowInfo.closeProgressDialog();
                 
                 if(success){
+                	// get the list of objects 
                     mObjects = objects.getResult();
+                    // check if any more note on KiiCloud
                     isMore = objects.hasNext();
+                    // get the KiiQuery for next batch
                     mNextQuery = objects.getNextKiiQuery();
+                    // update the UI with updated note's title
                     activity.rebuildTitle(getTitles());
+
+                    // show toast message if no result
                     if(mObjects.size() == 0){
                         Toast.makeText(activity,
                                 "no result", Toast.LENGTH_SHORT).show();
                     }
                 } else{
+                	// show error message
                     ShowInfo.showException(activity, exception);
                 }
             }
             
-        }, KII_OBJECT_TYPE, null);
+        }, KII_OBJECT_TYPE, query);
 
         return token;
 
     }
     
+    /**
+     * Query Kii Cloud for the list of note that matches previous KiiQuery
+     */
     public static int asyncQueryMore(final NoteItemListActivity activity) {
         int token = KiiObject.query(new KiiObjectCallBack(){
 
             @Override
             public void onQueryCompleted(int token, boolean success,
                     KiiQueryResult<KiiObject> objects, Exception exception) {
+        		// close the progress dialog
                 ShowInfo.closeProgressDialog();
                 
                 if(success){
+                	// add the objects to the existing list
                     mObjects.addAll(objects.getResult());
+                    // check if any more note on KiiCloud
                     isMore = objects.hasNext();
+                    // get the KiiQuery for next batch
                     mNextQuery = objects.getNextKiiQuery();
+                    // update the UI with updated note's title
                     activity.rebuildTitle(getTitles());
+                    // show toast message if no result
                     if(mObjects.size() == 0){
                         Toast.makeText(activity,
                                 "no result", Toast.LENGTH_SHORT).show();
@@ -155,21 +181,31 @@ public class KiiNoteOperation {
         
     }
 
+    /**
+     * Update the note's content
+     */
     public static int asyncUpdateNote(final NoteItemListActivity activity, int postion, String content) {
-        KiiObject object = mObjects.get(postion);
+        // get the note 
+    	KiiObject object = mObjects.get(postion);
+    	// set the content of the note
         object.set(PROPERTY_CONTENT, content);
         
+        // save the updated note to Kii Cloud
         int token = object.save(new KiiObjectCallBack(){
 
+        	// implement the call back on save completed
             @Override
             public void onSaveCompleted(int token, boolean success,
                     KiiObject object, Exception exception) {
+            	// close progress dialog
                 ShowInfo.closeProgressDialog();
                 
                 if(success){
+                	// show operation is successful
                     Toast.makeText(activity,
-                            "Note saved", Toast.LENGTH_SHORT).show();
+                            "Note is saved.", Toast.LENGTH_SHORT).show();
                 } else{
+                	// show error message
                     ShowInfo.showException(activity, exception);
                 }
             }
@@ -179,20 +215,29 @@ public class KiiNoteOperation {
         return token;
     }
 
+    /**
+     * Delete the note
+     */
     public static int asyncDeleteNote(final NoteItemListActivity activity, final int position) {
         
-        KiiObject object = mObjects.get(position);
+        // get the note
+    	KiiObject object = mObjects.get(position);
+    	// delete the note from Kii Cloud
         int token = object.delete(new KiiObjectCallBack(){
 
+        	// implement the call back on delete completed
             @Override
             public void onDeleteCompleted(int token, boolean success,
                     Exception exception) {
                 if(success){
                     if(position > -1){
+                    	// remove the note from the cache
                         mObjects.remove(position);
+                        // update the UI with updated note's title
                         activity.rebuildTitle(getTitles());
                     }
                 }else{
+                	// show error message
                     ShowInfo.showException(activity, exception);
                 }
             }
@@ -202,33 +247,43 @@ public class KiiNoteOperation {
         return token;
     }
 
+    /**
+     * Create a note
+     */
     public static int asyncCreateNote(final NoteItemListActivity activity, String title, String content) {
 
-        String creator = KiiClient.getCurrentUser().toUri().toString();
-        KiiObject newobject = new KiiObject(KII_OBJECT_TYPE);
-        newobject.set(PROPERTY_TITLE, title);
+        // Create an empty object
+    	KiiObject newobject = new KiiObject(KII_OBJECT_TYPE);
+    	// set the title of the note
+    	newobject.set(PROPERTY_TITLE, title);
+    	// set the content of the note
         newobject.set(PROPERTY_CONTENT, content);
-        newobject.set(ConstantValues.FIELDNAME_CREATOR, creator);
-        newobject.set("my_number", 3);
+        // set the creator reference
+        newobject.set(ConstantValues.FIELDNAME_CREATOR, KiiClient.getCurrentUser().toUri().toString());
 
+        // save the KiiObject Kii Cloud
         int token = newobject.save(new KiiObjectCallBack(){
 
+        	// implement call back on save completed
             @Override
             public void onSaveCompleted(int token, boolean success,
                     KiiObject object, Exception exception) {
+            	// cloe progress dialog
                 ShowInfo.closeProgressDialog();
                 
                 if(success){
+                	// add the newly created to the list of note
                     mObjects.add(0, object);
+                    // update the UI with updated note's title
                     activity.rebuildTitle(getTitles());
                 } else{
+                	// show error message
                     ShowInfo.showException(activity, exception);
                 }
             }
             
         });
-        
         return token;
-
     }
+    
 }

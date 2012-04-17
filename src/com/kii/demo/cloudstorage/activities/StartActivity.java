@@ -190,20 +190,16 @@ public class StartActivity extends Activity implements OnItemClickListener {
                                 String email = emailView.getText().toString();
                                 String phone = phoneView.getText().toString();
 
-                                KiiUser user = new KiiUser();
-                                user.setEmail(email);
-                                user.set(ConstantValues.FIELD_USER_PHONE, phone);
-
                                 if (ConstantValues.mSyncMode) {
                                     KiiUserOperation.createUser(
-                                            StartActivity.this, user, username,
-                                            pwd);
+                                            StartActivity.this, username,
+                                            pwd, email, phone);
                                 } else {
 
                                     int token = KiiUserOperation
                                             .asyncCreateUser(
-                                                    StartActivity.this, user,
-                                                    username, pwd);
+                                                    StartActivity.this,
+                                                    username, pwd, email, phone);
                                     ShowInfo.showProcessing(StartActivity.this,
                                             token, "Creating User");
                                 }

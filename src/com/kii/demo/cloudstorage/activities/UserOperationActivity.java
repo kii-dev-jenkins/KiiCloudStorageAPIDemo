@@ -199,7 +199,7 @@ public class UserOperationActivity extends Activity implements
                                 if (ConstantValues.mSyncMode) {
                                     KiiUserOperation.changePwd(UserOperationActivity.this, old_pwd, new_pwd);
                                 } else {
-                                    int token = KiiUserOperation.asyncchangePwd(UserOperationActivity.this, old_pwd, new_pwd);
+                                    int token = KiiUserOperation.asyncChangePwd(UserOperationActivity.this, old_pwd, new_pwd);
                                     if (token >= 0) {
                                         ShowInfo.showProcessing(UserOperationActivity.this, token,
                                                 "Changing Password");

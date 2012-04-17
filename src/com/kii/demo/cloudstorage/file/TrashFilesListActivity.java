@@ -119,7 +119,7 @@ public class TrashFilesListActivity extends Activity {
                                 public void onClick(DialogInterface dialog,
                                         int whichButton) {
                                     int token = KiiFileOperation
-                                            .asyncDeleteTrashFile(
+                                            .asyncDeleteTrashedFile(
                                                     TrashFilesListActivity.this,
                                                     position);
 

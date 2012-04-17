@@ -85,13 +85,9 @@ public class NoteItemListActivity extends Activity implements
         
         updateUserStateTitle();
         
-        if (ConstantValues.mSyncMode) {
-            KiiNoteOperation.getAllNote(this);
-        } else {
-            int token = KiiNoteOperation.asyncGetAllNote(this);
-            if (token > 0) {
-                ShowInfo.showProcessing(this, token, "Getting note");
-            }
+        int token = KiiNoteOperation.asyncGetAllNote(this);
+        if (token > 0) {
+        	ShowInfo.showProcessing(this, token, "Getting note");
         }
     }
     
