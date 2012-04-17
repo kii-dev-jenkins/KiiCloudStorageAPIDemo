@@ -1,7 +1,5 @@
 # Kii Cloud Storage API Demos #
 
-
-
 A variety of small applications that demonstrate the use of Kii Cloud Storage SDK. It includes samples of:
 
 - Application User Management
@@ -49,13 +47,25 @@ A variety of small applications that demonstrate the use of Kii Cloud Storage SD
 
 *Refer to [KiiFileOperation class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/KiiFileOperation.java)*
 
-----------
 
-**Additional Notes**
+#Getting Started#
 
-- Update the Sample app with your own application ID and application key at com.kii.demo.cloudstorage.api.AppInfo class. 
+##Requirements##
+- Support Android 2.2 and above
+
+
+##Installation and Setup##
+
+- Download the [sample app](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/zipball/master).
+
+- If you are developing in Eclipse with the ADT Plugin, create a project for the "KiiCloudStorageAPIDemo" sample app by starting a new Android Project, selecting "Create project from existing source".
+
+- Update the sample app with your own application ID and application key at [AppInfo class](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/blob/master/src/com/kii/demo/cloudstorage/api/AppInfo.java).
 
 - The SDK javadoc is not automtatic visible in your eclipse project, you need to attach the JavaDoc([doc folder](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/tree/master/doc)) to the Kii Cloud SDK jar file ([lib folder](https://github.com/kii-dev-jenkins/KiiCloudStorageAPIDemo/tree/master/libs)). 
 
-
 - [Java API documenatation](http://static.kii.com/devportal/production/docs/storage/)
+
+
+
+All of the samples are licensed under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0), so feel free to use any of the code in your own applications as needed!
